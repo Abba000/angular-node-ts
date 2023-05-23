@@ -1,0 +1,77 @@
+<div class="navigation" [class.active]="activeToggle">   
+    <ul #listItems>
+        <li>
+            <a>
+                <span class="icon"><i class="fa-solid fa-store"></i></span>
+                <span class="title" style="font-size: 20px;">Venta Plus</span>
+            </a>
+        </li>
+
+        <br>
+        <br>
+
+        <li class="list" [class.active]="activeItem === 0" (click)="setActive(0)">
+            <b></b>
+            <b></b>
+            <a routerLink="">
+              <span class="icon"><i class="fa-solid fa-house"></i></span>
+              <span class="title">Home</span>
+            </a>
+        </li>
+        <li class="list" [class.active]="activeItem === 2" (click)="setActive(2)">
+            <b></b>
+            <b></b>
+            <a routerLink="/usuarios">
+                <span class="icon"><i class="fa-solid fa-users"></i></span>
+                <span class="title">Usuarios</span>
+            </a>
+        </li>
+        <li class="list" [class.active]="activeItem === 3" (click)="setActive(3)">
+            <b></b>
+            <b></b>
+            <a routerLink="/productos">
+                <span class="icon"><i class="fa-solid fa-cart-flatbed"></i></span>
+                <span class="title">Productos</span>
+            </a>
+        </li>
+        <li class="list" [class.active]="activeItem === 4" (click)="setActive(4)">
+            <b></b>
+            <b></b>
+            <a routerLink="/venta">
+                <span class="icon"><i class="fa-solid fa-cart-shopping"></i></span>
+                <span class="title">Ventas</span>
+            </a>
+        </li>
+        <li class="list" [class.active]="activeItem === 5" (click)="setActive(5)">
+            <b></b>
+            <b></b>
+            <a routerLink="">
+                <span class="icon"><i class="fas fa-history"></i></span>
+                <span class="title">Historial de venta</span>
+            </a>
+        </li>
+        <li class="list" [class.active]="activeItem === 6" (click)="setActive(6)">
+            <b></b>
+            <b></b>
+            <a routerLink="">
+                <span class="icon"><i class="fa-solid fa-file-lines"></i></span>
+                <span class="title">Reportes</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="container" [class.active]="activeToggle">
+    <div class="navbar" #toggleEl>
+        <i class="fa-solid fa-toggle-on close" (click)="toggleActive()"></i>
+        <i class="fa-solid fa-toggle-off open" (click)="toggleActive()"></i>
+
+        <div class="user">
+            <img src="favicon.ico" alt="">
+        </div>
+
+        <i class="fa-solid fa-arrow-right-from-bracket exit"></i>
+    </div>
+
+    <router-outlet></router-outlet>
+</div>

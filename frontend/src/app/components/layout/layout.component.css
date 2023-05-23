@@ -1,0 +1,194 @@
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.navigation {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    width: 65px;
+    border-radius: 0px;
+    box-sizing: initial;
+    border-left: 5px solid #2046A1;
+    background-color: #2046A1;
+    transition: width 0.5s;
+    overflow: hidden;
+}
+
+.navigation.active {
+    width: 300px;
+}
+
+.navigation ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.navigation ul li {
+    position: relative;
+    list-style: none;
+    width: 100%;
+    margin-top: 5px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.navigation ul li.active {
+    background-color: #fff;
+}
+
+.navigation ul li b:nth-child(1) {
+    position: absolute;
+    top: -20px;
+    height: 20px;
+    width: 100%;
+    background: #fff;
+    display: none;
+}
+
+.navigation ul li b:nth-child(1)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-bottom-right-radius: 20px;
+    background: #2046A1;
+}
+
+.navigation ul li b:nth-child(2) {
+    position: absolute;
+    bottom: -20px;
+    height: 20px;
+    width: 100%;
+    background: #fff;
+    display: none;
+}
+
+.navigation ul li b:nth-child(2)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-top-right-radius: 20px;
+    background: #2046A1;
+}
+
+.navigation ul li.active b:nth-child(1),
+.navigation ul li.active b:nth-child(2) {
+    display: block;
+}
+
+.navigation ul li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: #fff;
+}
+
+.navigation ul li.active a {
+    color: #071A55;
+}
+
+.navigation ul li a .icon {
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 70px;
+    text-align: center;
+}
+
+.navigation ul li a .icon i {
+    font-size: 1.5em;
+}
+
+.navigation ul li a .title {
+    position: relative;
+    display: block;
+    padding-left: 10px;
+    height: 60px;
+    line-height: 60px;
+    white-space: nowrap;
+    font-size: 15px;
+    margin-top: 2px;
+}
+
+.container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: calc(100% - 70px);
+    margin-left: 70px;
+    overflow-y: auto;
+    transition: 0.5s;
+}
+
+.container.active {
+    width: calc(100% - 305px);
+    margin-left: 305px;
+    transition: 0.5s;
+}
+
+.container .navbar {
+    width: 100%;
+    display: flex;
+    height: 50px;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.container .navbar i {
+    cursor: pointer;
+    color: #071A55;
+    font-size: 30px;
+    display: none;
+}
+
+.container .navbar i.open,
+.container.active .navbar.active i.close {
+    display: block;
+}
+
+.container .navbar i.close,
+.container.active .navbar.active i.open {
+    display: none;
+}
+ 
+.user {
+    margin-left: auto;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+  
+.user img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.container .navbar i.exit {
+    margin-left: 10px;
+    display: block;
+    font-size: 20px;
+}

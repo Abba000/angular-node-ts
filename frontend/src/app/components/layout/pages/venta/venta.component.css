@@ -1,0 +1,32 @@
+table {
+    width: 100%;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.formulario {
+    width: 30%;
+    margin-top: 5px;
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+    margin-right: 5px;
+}
+
+.tipo-pago {
+    flex: 50%;
+    margin-right: 5px;
+}
+
+.button-registrar {
+    float: right;
+    margin-top: 20px;
+}
+

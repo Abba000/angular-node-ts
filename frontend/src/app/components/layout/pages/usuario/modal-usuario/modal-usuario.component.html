@@ -1,0 +1,65 @@
+<h2 mat-dialog-title>{{ tituloAccion }} Usuario</h2>
+
+<mat-dialog-content>
+    <form [formGroup]="formularioUsuario">
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre Completo</mat-label>
+                <input matInput autocomplete="off" formControlName="nombreCompleto">
+                <mat-icon matSuffix>account-box</mat-icon>
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <div class="column-left">
+                <mat-form-field appearance="outline">
+                    <mat-label>Correo</mat-label>
+                    <input matInput autocomplete="off" formControlName="correo">
+                    <mat-icon matSuffix>mail</mat-icon>
+                </mat-form-field>
+            </div>
+
+            <div class="column">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Contraseña</mat-label>
+                    <input [type]="ocultarPassword?'password':'text'" formControlName="clave" matInput>
+                    <button mat-icon-button matSuffix (click)="ocultarPassword = !ocultarPassword" type="button">
+                        <mat-icon matSuffix>{{ocultarPassword ? 'visibility_off':'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column-left">
+                <mat-form-field appearance="outline">
+                    <mat-label>Rol</mat-label>
+                    <mat-select formControlName="idRol">
+                        <mat-option *ngFor="let item of roles" [value]="item.idRol">
+                            {{item.nombre}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            
+            <div class="column">
+                <mat-form-field appearance="outline">
+                    <mat-label>Estado</mat-label>
+                    <mat-select formControlName="activo">
+                        <mat-option value="1">Activo</mat-option>
+                        <mat-option value="0">Inactivo</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div align="end">
+            <button mat-raised-button mat-dialog-close color="warn" style="margin-right: 5px;">Volver</button>
+            <button 
+                mat-raised-button color="primary" 
+                [disabled]="formularioUsuario.invalid"
+                (click)="guardarEditarUsuario()"
+            >{{botonAccion}}</button>
+        </div>
+    </form>
+</mat-dialog-content>
