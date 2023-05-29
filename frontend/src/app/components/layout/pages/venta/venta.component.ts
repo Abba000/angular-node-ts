@@ -106,31 +106,29 @@ export class VentaComponent {
       this.bloquearBotonRegistrar = true;
 
       const request: Venta = {
-        tipoPago: this.tipoPagoPorDefecto,
+        // tipoPago: this.tipoPagoPorDefecto,
         totalTexto: String(this.totalPagar.toFixed(2)),
         detalleVenta: this.listaProductosParaVenta
       }
 
-      this._ventaServicio.registrar(request).subscribe({
-        next: (response) => {
-          if(response.status) {
-            this.totalPagar = 0.00;
-            this.listaProductosParaVenta = [];
-            this.datosDetalleVenta = new MatTableDataSource(this.listaProductosParaVenta);
+      console.log(request);
 
-            Swal.fire({
-              icon: 'success',
-              title: 'Venta Registrada!',
-              text: `Numero de venta ${response.value.numeroDocumento}`
-            })
-          } else
-          this._utilidadServicio.mostrarAlerta("No se pudo registrar la venta", "Oops");
+      this._ventaServicio.createVenta(request).subscribe(
+        () => {
+          this.totalPagar = 0.00;
+          this.listaProductosParaVenta = [];
+          this.datosDetalleVenta = new MatTableDataSource(this.listaProductosParaVenta);
+
+          Swal.fire({
+            icon: 'success',
+            title: 'Venta Registrada!',
+            text: 'La venta ha sido registrada exitosamente.'
+          });
         },
-        complete: () => {
-          this.bloquearBotonRegistrar = false;
-        },
-        error: (e) => {}
-      })
+        (error: any) => {
+          this._utilidadServicio.mostrarAlerta("No se pudo registrar la venta", "Error");
+        }
+      );  
     }
   }
 }

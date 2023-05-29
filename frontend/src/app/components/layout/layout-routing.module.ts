@@ -5,6 +5,7 @@ import { LayoutComponent } from './layout.component';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
 import { ProductoComponent } from './pages/producto/producto.component';
 import { VentaComponent } from './pages/venta/venta.component';
+import { DetalleVentaComponent } from './pages/detalle-venta/detalle-venta.component';
 
 const routes: Routes = [{
   path:'',
@@ -14,7 +15,7 @@ const routes: Routes = [{
     {path:'usuarios', component:UsuarioComponent},
     {path:'productos', component:ProductoComponent},
     {path:'venta', component:VentaComponent},
-    //{path:'historial_venta', component:HistorialVentaComponent},
+    {path:'historial-venta', component:DetalleVentaComponent},
     //{path:'reportes', component:ReporteComponent},
   ]
 }];

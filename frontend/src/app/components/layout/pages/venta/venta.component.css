@@ -1,5 +1,6 @@
 table {
     width: 100%;
+    padding: 0 5px;
 }
 
 mat-form-field {
@@ -7,7 +8,6 @@ mat-form-field {
 }
 
 .formulario {
-    width: 30%;
     margin-top: 5px;
 }
 
@@ -15,18 +15,18 @@ mat-form-field {
     display: flex;
 }
 
+.row-end {
+    display: flex;
+    margin-top: 30px;
+}
+
 .column {
     flex: 50%;
-    margin-right: 5px;
+    padding: 0 5px;
 }
 
-.tipo-pago {
-    flex: 50%;
-    margin-right: 5px;
-}
-
-.button-registrar {
+button {
     float: right;
-    margin-top: 20px;
+    margin-right: 5px;
 }
 

@@ -9,6 +9,8 @@ import { ModalUsuarioComponent } from './pages/usuario/modal-usuario/modal-usuar
 import { ModalProductoComponent } from './pages/producto/modal-producto/modal-producto.component';
 import { VentaComponent } from './pages/venta/venta.component';
 import { HomeComponent } from './pages/home/home.component';
+import { DetalleVentaComponent } from './pages/detalle-venta/detalle-venta.component';
+import { ModalDetalleVentaComponent } from './pages/detalle-venta/modal-detalle-venta/modal-detalle-venta.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { HomeComponent } from './pages/home/home.component';
     ModalUsuarioComponent,
     ModalProductoComponent,
     VentaComponent,
-    HomeComponent
+    HomeComponent,
+    DetalleVentaComponent,
+    ModalDetalleVentaComponent
   ],
   imports: [
     CommonModule,

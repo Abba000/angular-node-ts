@@ -4,50 +4,35 @@
     <mat-card-content>
         <form [formGroup]="formularioProductoVenta" (ngSubmit)="agregarProductoParaVenta()">           
             <div class="formulario">
-                <mat-form-field appearance="outline">
-                    <mat-label>Producto</mat-label>
-                    <input matInput type="text" placeholder="Buscar" [matAutocomplete]="auto" formControlName="producto">
-                    <mat-autocomplete autoActiveFirstOption 
-                        #auto="matAutocomplete"
-                        (optionSelected)="productoParaVenta($event)"
-                        [displayWith]="mostrarProducto">
-
-                        <mat-option *ngFor="let option of listaProductosFiltro" [value]="option">
-                            {{option.nombre}}
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>   
                 <div class="row">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Cantidad</mat-label>
-                        <input matInput type="number" formControlName="cantidad">
-                    </mat-form-field>
-                    
-                    <button mat-mini-fab color="primary" [disabled]="formularioProductoVenta.invalid">
-                        <mat-icon mat-list-icon>add</mat-icon>
-                    </button>
-                </div> 
+                    <div class="column">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Producto</mat-label>
+                            <input matInput type="text" placeholder="Buscar" [matAutocomplete]="auto" formControlName="producto">
+                            <mat-autocomplete autoActiveFirstOption 
+                                #auto="matAutocomplete"
+                                (optionSelected)="productoParaVenta($event)"
+                                [displayWith]="mostrarProducto">
+        
+                                <mat-option *ngFor="let option of listaProductosFiltro" [value]="option">
+                                    {{option.nombre}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>   
+                    </div>
+                    <div class="column">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Cantidad</mat-label>
+                            <input matInput type="number" formControlName="cantidad">
+                        </mat-form-field>
+                    </div> 
+                </div>
+            
+                <button mat-raised-button color="primary" [disabled]="formularioProductoVenta.invalid">
+                    <mat-icon mat-list-icon>add</mat-icon> Agregar
+                </button>
             </div>
         </form>
-
-        <div class="row">
-            <div class="column">
-                <mat-form-field appearance="outline">
-                    <mat-label>Tipo de pago</mat-label>
-                    <mat-select [(value)]="tipoPagoPorDefecto">
-                        <mat-option value="Efectivo">Efectivo</mat-option>
-                        <mat-option value="Tarjeta">Tarjeta</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-
-            <div class="column">
-                <mat-form-field appearance="outline">
-                    <mat-label>Total a pagar</mat-label>
-                    <input matInput type="number" [disabled]="true" value="{{totalPagar.toFixed(2)}}">
-                </mat-form-field>
-            </div>
-        </div>
 
         <div>
             <table mat-table [dataSource]="datosDetalleVenta">
@@ -84,6 +69,25 @@
                 <tr mat-row *matRowDef="let row; columns : columnasTabla;"></tr>
     
             </table>
+        </div>
+
+        <div class="row-end">
+            <div class="column">
+                <mat-form-field appearance="outline">
+                    <mat-label>Tipo de pago</mat-label>
+                    <mat-select [(value)]="tipoPagoPorDefecto">
+                        <mat-option value="Efectivo">Efectivo</mat-option>
+                        <mat-option value="Tarjeta">Tarjeta</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="column">
+                <mat-form-field appearance="outline">
+                    <mat-label>Total a pagar</mat-label>
+                    <input matInput type="number" [disabled]="true" value="{{totalPagar.toFixed(2)}}">
+                </mat-form-field>
+            </div>
         </div>
 
         <button mat-raised-button color="primary" 

@@ -11,12 +11,12 @@ import { Venta } from '../interfaces/venta';
 })
 export class VentaService {
 
-  private urlApi:string = environment.endpoint + "Venta/";
+  private urlApi:string = environment.endpoint + "ventas/";
 
   constructor(private http:HttpClient) { }
 
-  registrar(request: Venta): Observable<ResponseApi> {
-    return this.http.post<ResponseApi>(`${this.urlApi}Registrar`, request)
+  createVenta(request: Venta): Observable<void> {
+    return this.http.post<void>(`${this.urlApi}`, request)
   }
 
   historial(buscarPor:string, numeroVenta:string, fechaInicio:string, fechaFin:string): Observable<ResponseApi> {
