@@ -1,11 +1,11 @@
 import { Router } from "express";
 
-import { getDetalleVentas, createDetalleVenta, getDetalleVenta, deleteDetalleVenta, updateDetalleVenta } from "../controllers/detalle-venta.controller";
+import { getDetallesVenta, createDetalleVenta, getDetalleVenta, deleteDetalleVenta, updateDetalleVenta } from "../controllers/detalle-venta.controller";
 
 const router = Router();
 
 router.route('/')
-    .get(getDetalleVentas)
+    .get(getDetallesVenta)
     .post(createDetalleVenta);
 
 router.route('/:idDetalleVenta')

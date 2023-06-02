@@ -37,7 +37,6 @@ export class VentaComponent {
     const valorBuscado = typeof busqueda === 'string' ? busqueda.toLowerCase() : busqueda.target?.value?.toLowerCase() || '';
     return this.listaProductos.filter(item => item.nombre.toLowerCase().includes(valorBuscado));
   }
-  
 
   constructor(
     private fb: FormBuilder,
@@ -106,8 +105,9 @@ export class VentaComponent {
       this.bloquearBotonRegistrar = true;
 
       const request: Venta = {
-        // tipoPago: this.tipoPagoPorDefecto,
-        totalTexto: String(this.totalPagar.toFixed(2)),
+        numeroDoucmento: "1",
+        tipoPago: this.tipoPagoPorDefecto,
+        totalTexto: this.totalPagar.toFixed(2),
         detalleVenta: this.listaProductosParaVenta
       }
 
@@ -122,10 +122,10 @@ export class VentaComponent {
           Swal.fire({
             icon: 'success',
             title: 'Venta Registrada!',
-            text: 'La venta ha sido registrada exitosamente.'
+            text: 'La venta ha sido registrada exitosamente.' + request.numeroDoucmento
           });
         },
-        (error: any) => {
+        (error) => {
           this._utilidadServicio.mostrarAlerta("No se pudo registrar la venta", "Error");
         }
       );  

@@ -1,24 +1,37 @@
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
-<h1 style="margin:20px 0px 0px 40px">Usuarios</h1>
 
-<mat-card style="margin:20px 40px 40px 40px">
-    <mat-card-header>
+
+<mat-card style="margin:20px 40px 0px 40px">
+    <mat-card-header class="title">
+        <h2 style="color: #071E55;">Usuarios</h2>
+
         <button mat-raised-button color="primary" (click)="modalUsuario()">
             <mat-icon mat-list-icon>add</mat-icon>
             Nuevo
         </button>
-
-        <form class="form-buscar">
-            <input type="text" required (keyup)="aplicarFiltroTabla($event)" #input>
-            <label class="lbl-buscar">
-                <span class="txt-buscar">Buscar</span>
-            </label>
-        </form>
     </mat-card-header>
+</mat-card>
+
+<div style="margin:10px 40px 0px 40px">
+    <form class="form-buscar">
+        <input type="text" required (keyup)="aplicarFiltroTabla($event)" #input>
+        <label class="lbl-buscar">
+            <span class="txt-buscar">Buscar</span>
+        </label>
+    </form>
+</div>
+
+
+<mat-card style="margin:20px 40px 40px 40px">
+    <!-- <mat-card-header>
+        <form class="input-field">
+            <input type="text" required (keyup)="aplicarFiltroTabla($event)" #input>
+            <label>Buscar...</label>
+        </form>
+        
+    </mat-card-header> -->
 
     <mat-card-content>
-        <br>
-
         <div>
             <table mat-table [dataSource]="dataListaUsuarios">
                 <ng-container matColumnDef="nombreCompleto">
@@ -63,7 +76,7 @@
     
             </table>
     
-            <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+            <mat-paginator [pageSizeOptions]="[5,10,20]" [pageSize]="10" showFirstLastButtons></mat-paginator>
         </div>
     </mat-card-content>
 </mat-card>

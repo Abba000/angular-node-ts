@@ -11,6 +11,7 @@ import { VentaComponent } from './pages/venta/venta.component';
 import { HomeComponent } from './pages/home/home.component';
 import { DetalleVentaComponent } from './pages/detalle-venta/detalle-venta.component';
 import { ModalDetalleVentaComponent } from './pages/detalle-venta/modal-detalle-venta/modal-detalle-venta.component';
+import { ReporteComponent } from './pages/reporte/reporte.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ModalDetalleVentaComponent } from './pages/detalle-venta/modal-detalle-
     VentaComponent,
     HomeComponent,
     DetalleVentaComponent,
-    ModalDetalleVentaComponent
+    ModalDetalleVentaComponent,
+    ReporteComponent
   ],
   imports: [
     CommonModule,

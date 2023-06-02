@@ -14,7 +14,9 @@ import { UtilidadService } from 'src/app/utilities/utilidad.service';
   templateUrl: './modal-usuario.component.html',
   styleUrls: ['./modal-usuario.component.css']
 })
+
 export class ModalUsuarioComponent {
+  
   formularioUsuario: FormGroup;
   ocultarPassword: boolean = true;
   tituloAccion: string = "Agregar";

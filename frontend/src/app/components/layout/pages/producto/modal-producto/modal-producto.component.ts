@@ -14,7 +14,9 @@ import { UtilidadService } from 'src/app/utilities/utilidad.service';
   templateUrl: './modal-producto.component.html',
   styleUrls: ['./modal-producto.component.css']
 })
+
 export class ModalProductoComponent {
+  
   formularioProducto: FormGroup;
   tituloAccion: string = "Agregar";
   botonAccion: string = "Guardar";

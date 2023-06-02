@@ -94,7 +94,7 @@ export class UsuarioComponent implements OnInit, AfterViewInit {
           this._utilidadServicio.mostrarAlerta("Error al eliminar el usuario" + error.message, "Error");
         });
       }
-    })
+    });
   }
   
 }

@@ -1,71 +1,70 @@
 import { Request, Response } from "express";
 
-import { connect } from "../database";
-import { Categoria } from "../interfaces/categoria.interface";
+import pool from "../database";
 
 export async function getCategorias(req: Request, res: Response): Promise<Response> {
     try {
-        const conn = await connect();
-        const categoria = await conn.query('SELECT * FROM Categoria');
-        await conn.end();
-    
-        return res.json(categoria[0]);
-    } catch (err) {
-        return res.status(500).json({ message: 'No se pudo obtener las categoria' });
-    }
-}
+        const categorias = await pool.query('SELECT * FROM Categoria');
+        return res.json(categorias[0]);
 
-export async function createCategoria(req: Request, res: Response): Promise<Response> {
-    try {
-        const newCategoria: Categoria = req.body;
-        const conn = await connect();
-        await conn.query('INSERT INTO Categoria SET ?', [newCategoria]);
-
-        return res.json({
-            message: 'Categoria creada'
-        });
     } catch (err) {
-        return res.status(500).json({ message: 'No se pudo crear la categoria'});
+        return res.status(500).json({ message: 'No se pudo obtener las categorias' });
     }
 }
 
 export async function getCategoria(req: Request, res: Response): Promise<Response> {
     try {
-        const id = req.params.idCategoria;
-        const conn = await connect();
-        const categoria = await conn.query('SELECT * FROM Categoria WHERE idCategoria = ?', [id]);
+        const { idCategoria } = req.params;
+        const categoria = await pool.query('SELECT * FROM Categoria WHERE idCategoria = ?', [idCategoria]);
 
-        return res.json(categoria[0]);
+        if (categoria.length > 0) {
+            return res.json(categoria[0]);
+        } else {
+            return res.status(404).json({ message: 'La categoria no existe'});
+        }
+
     } catch (err) {
         return res.status(500).json({ message: 'No se pudo obtener la categoria'});
     }
 }
 
-export async function deleteCategoria(req: Request, res: Response): Promise<Response> {
+export async function createCategoria(req: Request, res: Response): Promise<Response> {
     try {
-        const id = req.params.idCategoria;
-        const conn = await connect();
-        await conn.query('DELETE FROM Categoria WHERE idCategoria = ?', [id]);
+        await pool.query('INSERT INTO Categoria SET ?', [req.body]);
 
         return res.json({
-            message: 'Categoria eliminada'
+            message: 'Categoria creada'
         });
+        
     } catch (err) {
-        return res.status(500).json({ message: 'No se pudo eliminar la categoria'});
+        return res.status(500).json({ message: 'No se pudo crear la categoria'});
     }
 }
 
 export async function updateCategoria(req: Request, res: Response): Promise<Response> {
     try {
-        const id = req.params.idCategoria;
-        const updateCategoria: Categoria = req.body;
-        const conn = await connect();
-        await conn.query('UPDATE Categoria SET? WHERE idCategoria = ?', [updateCategoria, id]);
+        const { idCategoria } = req.params;
+        await pool.query('UPDATE Categoria SET? WHERE idCategoria = ?', [req.body, idCategoria]);
 
         return res.json({
             message: 'Categoria editada'
         });
+
     } catch (err) {
         return res.status(500).json({ message: 'No se pudo editar la categoria'});
+    }
+}
+
+export async function deleteCategoria(req: Request, res: Response): Promise<Response> {
+    try {
+        const { idCategoria } = req.params;
+        await pool.query('DELETE FROM Categoria WHERE idCategoria = ?', [idCategoria]);
+
+        return res.json({
+            message: 'Categoria eliminada'
+        });
+
+    } catch (err) {
+        return res.status(500).json({ message: 'No se pudo eliminar la categoria'});
     }
 }

@@ -42,7 +42,7 @@
 }
 
 .navigation ul li.active {
-    background-color: #fff;
+    background-color: #eee;
 }
 
 .navigation ul li b:nth-child(1) {
@@ -50,7 +50,7 @@
     top: -20px;
     height: 20px;
     width: 100%;
-    background: #fff;
+    background: #eee;
     display: none;
 }
 
@@ -70,7 +70,7 @@
     bottom: -20px;
     height: 20px;
     width: 100%;
-    background: #fff;
+    background: #eee;
     display: none;
 }
 
@@ -96,7 +96,7 @@
     width: 100%;
     display: flex;
     text-decoration: none;
-    color: #fff;
+    color: #eee;
 }
 
 .navigation ul li.active a {

@@ -1,71 +1,50 @@
 import { Request, Response } from "express";
 
-import { connect } from "../database";
-import { Venta } from "../interfaces/venta.interface";
+import pool from "../database";
 
 export async function getVentas(req: Request, res: Response): Promise<Response> {
     try {
-        const conn = await connect();
-        const venta = await conn.query('SELECT * FROM Venta');
-        await conn.end();
-    
-        return res.json(venta[0]);
+        const ventas = await pool.query('SELECT * FROM Venta');
+        return res.json(ventas[0]);
+
     } catch (err) {
         return res.status(500).json({ message: 'No se pudo obtener las ventas' });
     }
 }
 
-export async function createVenta(req: Request, res: Response): Promise<Response> {
-    try {
-        const newVenta: Venta = req.body;
-        const conn = await connect();
-        await conn.query('INSERT INTO Venta SET ?', [newVenta]);
-
-        return res.json({
-            message: 'Venta creada'
-        });
-    } catch (err) {
-        return res.status(500).json({ message: 'No se pudo crear el venta'});
-    }
-}
-
 export async function getVenta(req: Request, res: Response): Promise<Response> {
     try {
-        const id = req.params.idVenta;
-        const conn = await connect();
-        const venta = await conn.query('SELECT * FROM Venta WHERE idVenta = ?', [id]);
+        const { idVenta } = req.params;
+        const venta = await pool.query('SELECT * FROM Venta WHERE idVenta = ?', [idVenta]);
 
-        return res.json(venta[0]);
+        if (venta.length > 0) {
+            return res.json(venta[0]);
+        } else {
+            return res.status(500).json({ message: 'La venta no existe'});
+        }
+        
     } catch (err) {
         return res.status(500).json({ message: 'No se pudo obtener la venta'});
     }
 }
 
-export async function deleteVenta(req: Request, res: Response): Promise<Response> {
+export async function createVenta(req: Request, res: Response): Promise<Response> {
     try {
-        const id = req.params.idVenta;
-        const conn = await connect();
-        await conn.query('DELETE FROM Venta WHERE idVenta = ?', [id]);
+        const result = await pool.query('INSERT INTO Venta (numeroDocumento, tipoPago, total, fechaRegistro) VALUES (?, ?, ?, ?)', 
+        [req.body.numeroDocumento, req.body.tipoPago, req.body.total, req.body.fechaRegistro]);
+
+        const ventaId = req.body.idVenta;
+
+        for (const detalle of req.body.detalleVenta) {
+            await pool.query('INSERT INTO DetalleVenta (idVenta, idProducto, cantidad, precio, total) VALUES (?, ?, ?, ?, ?)', 
+            [ventaId, detalle.idProducto, detalle.cantidad, detalle.precio, detalle.total]);
+        }
 
         return res.json({
-            message: 'Venta eliminada'
+            message: 'Venta creada'
         });
     } catch (err) {
-        return res.status(500).json({ message: 'No se pudo eliminar la venta'});
-    }
-}
-
-export async function updateVenta(req: Request, res: Response): Promise<Response> {
-    try {
-        const id = req.params.idVenta;
-        const updateVenta: Venta = req.body;
-        const conn = await connect();
-        await conn.query('UPDATE Venta SET? WHERE idVenta = ?', [updateVenta, id]);
-
-        return res.json({
-            message: 'Venta editada'
-        });
-    } catch (err) {
-        return res.status(500).json({ message: 'No se pudo editar el venta'});
+        return res.status(500).json({ message: 'No se pudo crear el venta' + err});
+        console.log(err);
     }
 }

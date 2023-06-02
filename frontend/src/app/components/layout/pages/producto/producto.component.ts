@@ -19,6 +19,7 @@ import { MatSort } from '@angular/material/sort';
     '../../../../app.component.css'
   ]
 })
+
 export class ProductoComponent implements OnInit, AfterViewInit {
 
   columnasTabla: string[] = ['nombre', 'categoria', 'stock', 'precio', 'estado', 'acciones'];
@@ -83,6 +84,7 @@ export class ProductoComponent implements OnInit, AfterViewInit {
       cancelButtonColor: '#d33',
       cancelButtonText: "No, volver"
     }).then((resultado) => {
+      
       if(resultado.isConfirmed) {
         this.loading = true;
         this._productoServicio.deleteProducto(id).subscribe(() => {

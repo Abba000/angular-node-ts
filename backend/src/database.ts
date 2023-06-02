@@ -1,13 +1,13 @@
-import { createPool } from 'mysql2/promise';
+import mysql from 'mysql2/promise';
 
-export async function connect() {
-    const connection = await createPool({
-        host: 'localhost',
-        user: 'root',
-        password: '42337856',
-        database: 'DBVenta',
-        connectionLimit: 10
+import keys from './keys';
+
+const pool = mysql.createPool(keys.database);
+
+pool.getConnection()
+    .then(connection => {
+        connection.release();
+        console.log('DB is Connected');
     });
 
-    return connection;
-}
+export default pool;
